@@ -1,0 +1,45 @@
+.category{
+    width: 100vw;
+    height: auto;
+    display: grid;
+    overflow: hidden;
+    justify-items: center;
+    grid-gap: 50px;
+    .headers{
+        width: 500px;
+        height: 50px;
+        background: rgb(0, 0, 0);
+        display: flex;
+        align-items: center;
+        border-radius: 15px;
+        padding: 5px 10px;
+        gap: 10px;
+        border: 1px solid white;
+        justify-content: space-evenly;
+        li{
+            list-style: none;
+            width: 100%;
+            color:#000;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            background: white;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+        }
+    }
+    .body{
+        width: 100vw;
+        height: auto;
+        overflow: hidden;
+        display: grid;
+        grid-gap: 20px;
+        grid-template-columns: repeat(4,1fr);
+        div{
+            width: 100%;
+            height: 300px;
+            background: white;
+        }
+    }
+}
