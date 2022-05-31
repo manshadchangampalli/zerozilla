@@ -70,7 +70,7 @@ const Category = () => {
           !catLoading ?
             productData?.map((data, i) => {
               return (
-                <Link to={`product/${data.id}`}>
+                <Link key={i} to={`product/${data.id}`}>
                   <Card data={data} />
                 </Link>
               )

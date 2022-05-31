@@ -9,12 +9,13 @@ const Cart = () => {
   return (
     <div className="cart-page">
       <Header />
+      <h1>My Cart</h1>
       <div className="cart-container">
         {
           data.length > 0 ?
             data.map((data, i) => (
-              <Link to={`/product/${data.id}`}>
-                <div key={i} className="cart-item">
+              <Link key={i} to={`/product/${data.id}`}>
+                <div  className="cart-item">
                   <img src={data.image} alt="" />
                   <div>
                     <div className="cart-details">

@@ -17,7 +17,7 @@ const Product = () => {
       .then(data => {
         setData(data);
       })
-  }, [])
+  }, [id])
   useEffect(() => {
     if (cartArray.includes(id)) {
       setDisable(true)
