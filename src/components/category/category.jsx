@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { navItems } from '../../redux/action'
 import Card from './card/Card'
 import './category.scss'
 
@@ -13,8 +15,10 @@ const Category = () => {
     name: "",
   })
 
-  console.log(category, productData);
+  const nav = useSelector(state => state.navItems)
+  const dispatch = useDispatch()
   const fetchProducts = () => {
+    console.log("entered");
     setcatLoading(true)
     fetch(`https://fakestoreapi.com/products/category/${selectItem.name}`)
       .then(res => res.json())
@@ -24,14 +28,21 @@ const Category = () => {
       })
   }
   useEffect(() => {
-    setTabLoading(true)
-    fetch("https://fakestoreapi.com/products/categories")
-      .then(res => res.json())
-      .then(data => {
-        setSelectItem({ id: 0, name: data[0] })
-        setCategory(data)
-        setTabLoading(false)
-      })
+    if (nav.length > 0) {
+      setSelectItem({ id: 0, name: nav[0] })
+      setCategory(nav)
+      return
+    } else {
+      setTabLoading(true)
+      fetch("https://fakestoreapi.com/products/categories")
+        .then(res => res.json())
+        .then(data => {
+          setSelectItem({ id: 0, name: data[0] })
+          setCategory(data)
+          dispatch(navItems(data))
+          setTabLoading(false)
+        })
+    }
   }, [])
 
   useEffect(() => {
@@ -45,12 +56,12 @@ const Category = () => {
             !tabLoading ?
               category.map((data, i) => (
                 <li
-                  style={{ color: i === selectItem.id ? "black" : "", background: i === selectItem.id ? "white" : "" }}
+                  style={{ color: i === selectItem.id ? "white" : "", background: i === selectItem.id ? "black" : "" }}
                   onClick={() => setSelectItem({ id: i, name: data })}
                   key={i}>
                   {data}
                 </li>
-              )) : <p>loading...</p>
+              )) : <p className='loading'>loading...</p>
           }
         </ul>
       </div>

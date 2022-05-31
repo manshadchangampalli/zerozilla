@@ -32,7 +32,7 @@ const Product = () => {
       dispatch(cartItems(data))
     }
   }
-  const cart = useSelector(state=>state.cartItems)
+  const cart = useSelector(state => state.cartItems)
   console.log(cart);
   return (
     <div className='product-page'>
@@ -47,7 +47,9 @@ const Product = () => {
       {
         data.image ?
           <>
-            <img className='product-img' src={data.image} alt="" />
+            <div className="image-wraper">
+              <img className='product-img' src={data.image} alt="" />
+            </div>
             <div className="product-details">
               <div className="detils-wraper">
                 <h1 className='title'>{data.title}</h1>
@@ -59,7 +61,7 @@ const Product = () => {
                 <h2 className="price"> price : ${data.price}</h2>
 
                 <button
-                  style={{opacity:disable?0.3:1}}
+                  style={{ opacity: disable ? 0.3 : 1 }}
                   onClick={addToCartHandler}
                   className="add-to-cart">
                   Add To Cart

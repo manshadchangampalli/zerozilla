@@ -17,3 +17,11 @@ export const cartItems = (state=[],action) => {
             return state
     }
 }
+export const navItems = (state=[],action) => {
+    switch(action.type){
+        case "NAV_ITEMS":
+            return state = action.payload
+        default:
+            return state
+    }
+}

@@ -3,6 +3,7 @@ import "./App.css";
 import Cart from "./pages/cart";
 import Home from "./pages/home";
 import Product from "./pages/product";
+import Profile from "./pages/profile";
 
 function App() {
   return (
@@ -12,6 +13,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/product/:id" element={<Product/>}/>
           <Route path="/cart" element={<Cart/>}/>
+          <Route path="/myprofile" element={<Profile/>}/>
         </Routes>
       </div>
     </BrowserRouter>

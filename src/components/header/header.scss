@@ -39,6 +39,7 @@
           width: 35px;
           height: 35px;
           object-fit: cover;
+          cursor: pointer;
       }
       .cart{
         position: relative;
@@ -54,6 +55,33 @@
           height: 25px;
           border-radius: 50%;
           background: #000;
+        }
+      }
+      .profile-icon{
+        position: relative;
+        .itembar{
+          position: absolute;
+          right: 0;
+          top: 110%;
+          background: white;
+          width: auto;
+          height: auto;
+          padding:5px 15px;
+          display: grid;
+          cursor: pointer;
+          border-radius: 5px;
+          &:hover{
+            background: rgb(217, 238, 255);
+          }
+          li{
+            list-style: none;
+            color: black;
+            width: 100%;
+            white-space: nowrap;
+            display: grid;
+            justify-items: center;
+            
+          }
         }
       }
   }

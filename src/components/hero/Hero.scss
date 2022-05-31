@@ -1,7 +1,12 @@
 .hero-page{
     width: 100vw;
     height: 100vh;
+    display: grid;
+    place-items: center;
     overflow: hidden;
-    background: url('../../Assets/img/bg.jpg') center no-repeat;
+    background: linear-gradient(to right, rgba(50, 70, 80, 0.7), rgba(0, 0, 0, 0.7)), url("../../Assets/img/bg.jpg") center no-repeat;
     background-size: cover;
+    h1{
+        font-size: 70px;
+    }
 }

@@ -11,3 +11,9 @@ export const cartItems = (item) => {
         payload:item
     }
 }
+export const navItems = (item) => {
+    return{
+        type:"NAV_ITEMS",
+        payload:item
+    }
+}
