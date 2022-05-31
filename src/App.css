@@ -10,3 +10,7 @@ body{
   color: white;
   overflow-x: hidden;
 }
+a{
+  color: inherit;
+  text-decoration: none;
+}

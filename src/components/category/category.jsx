@@ -12,7 +12,18 @@ const Category = () => {
     id: 0,
     name: "",
   })
-  const fetchCategory = () => {
+
+  console.log(category, productData);
+  const fetchProducts = () => {
+    setcatLoading(true)
+    fetch(`https://fakestoreapi.com/products/category/${selectItem.name}`)
+      .then(res => res.json())
+      .then(data => {
+        setProductData(data);
+        setcatLoading(false)
+      })
+  }
+  useEffect(() => {
     setTabLoading(true)
     fetch("https://fakestoreapi.com/products/categories")
       .then(res => res.json())
@@ -21,27 +32,11 @@ const Category = () => {
         setCategory(data)
         setTabLoading(false)
       })
-      .catch(err => {
-        console.log("err");
-      })
-  }
-  const fetchProducts = async () => {
-    setcatLoading(true)
-    const response = await fetch(`https://fakestoreapi.com/products/category/${selectItem.name}`)
-    const json = await response.json()
-    const data = json
-    setProductData(data);
-    setcatLoading(false)
-  }
-  console.log(productData);
-  useEffect(() => {
-    fetchCategory()
   }, [])
 
   useEffect(() => {
     fetchProducts()
   }, [selectItem])
-
   return (
     <div className="category">
       <div className="header-wraper">
