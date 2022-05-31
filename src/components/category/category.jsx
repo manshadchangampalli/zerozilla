@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import Card from './card/Card'
 import './category.scss'
 
 const Category = () => {
   const [category, setCategory] = useState([])
   const [productData, setProductData] = useState([])
-  const [tabLoading,setTabLoading] = useState(false)
-  const [catLoading,setcatLoading] = useState(false)
+  const [tabLoading, setTabLoading] = useState(false)
+  const [catLoading, setcatLoading] = useState(false)
   const [selectItem, setSelectItem] = useState({
     id: 0,
     name: "",
@@ -47,26 +48,28 @@ const Category = () => {
         <ul className="headers">
           {
             !tabLoading ?
-            category.map((data, i) => (
-              <li
-                style={{ color: i === selectItem.id ? "black" : "", background: i === selectItem.id ? "white" : "" }}
-                onClick={() => setSelectItem({ id: i, name: data })}
-                key={i}>
-                {data}
-              </li>
-            )): <p>loading...</p>
+              category.map((data, i) => (
+                <li
+                  style={{ color: i === selectItem.id ? "black" : "", background: i === selectItem.id ? "white" : "" }}
+                  onClick={() => setSelectItem({ id: i, name: data })}
+                  key={i}>
+                  {data}
+                </li>
+              )) : <p>loading...</p>
           }
         </ul>
       </div>
       <div className="category-body">
         {
-          !catLoading?
-          productData?.map((data, i) => {
-            return (
-              <Card data={data}/>
-            )
-          }):
-          <p className='loading'>Loading...</p>
+          !catLoading ?
+            productData?.map((data, i) => {
+              return (
+                <Link to={`product/${data.id}`}>
+                  <Card data={data} />
+                </Link>
+              )
+            }) :
+            <p className='loading'>Loading...</p>
         }
       </div>
     </div>

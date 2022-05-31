@@ -1,5 +1,8 @@
 import React from 'react'
 import './header.scss'
+import searchimg from '../../Assets/img/search.png'
+import cartimg from '../../Assets/img/cart.png'
+import avatarimg from '../../Assets/img/avatar.png'
 
 const Header = () => {
   return (
@@ -7,13 +10,13 @@ const Header = () => {
         <h1><u>zerozilla</u></h1>
         <div className="input-box">
             <input type="text" />
-            <img src="img/search.png" alt="search" />
+            <img src={searchimg} alt="search" />
         </div>
         <div className='nav-items'>
             <div className="cart">
-                <img src="img/cart.png" alt="" />
+                <img src={cartimg} alt="" />
             </div>
-            <img src="img/avatar.png" alt="" />
+            <img src={avatarimg} alt="" />
         </div>
     </div>
   )
