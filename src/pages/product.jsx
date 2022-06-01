@@ -21,8 +21,10 @@ const Product = () => {
   useEffect(() => {
     if (cartArray.includes(id)) {
       setDisable(true)
+    }else{
+      setDisable(false)
     }
-  }, [disable, cartArray])
+  }, [disable, cartArray, id])
 
   const addToCartHandler = () => {
     console.log("yes", cartArray);

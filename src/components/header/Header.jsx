@@ -7,8 +7,10 @@ import { useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
-  const [search,setSearch] = useState(false)
+  const [value, setValue] = useState("")
+  const [search, setSearch] = useState(false)
   const [data, setData] = useState([])
+  const [filteredData, setFilteredData] = useState([])
   const [profile, setProfile] = useState(false)
   const cartArray = useSelector(state => state.cartReducer)
 
@@ -19,41 +21,39 @@ const Header = () => {
         setData(data);
       })
   }, [])
-  const searchItem = (e) =>{
-    if(e.target.value.length > 0){
-      setSearch(true)
-      let filteredData = data.filter((data,i)=>{
-        return data.title.toLowerCase().match(new RegExp(e.target.value, "g"))
-      })
-      setData(filteredData)
-    }
-    setSearch(false)
+  const searchItem = (e) => {
+    setSearch(true)
+    setValue(e.target.value)
+    const fdata = data.filter((data , i ) => {
+      return (data.title.toLowerCase().includes(e.target.value.toLowerCase()) && i<4);
+    })
+    setFilteredData(fdata);
   }
-
-  console.log(data,"data");
+  console.log(filteredData);
   return (
     <div className='header'>
       <Link to="/">
         <h1><u>zerozilla</u></h1>
       </Link>
       <div className="input-box">
-        <input onChange={searchItem} type="text" />
+        <input onChange={searchItem} value={value} type="text" />
         <img src={searchimg} alt="search" />
         {
-          search &&
+          value.length > 0 && search &&
           <ul
-          ul className="searchItems">
-          {data.length > 0 ?
-            data.filter((data, i) => {
-              return i < 4
-            }).map((data, i) => (
-              <Link key={i} to={`/product/${data.id}`}>
-                <li onClick={()=>setSearch(false)} >{data.title.length > 30 ? `${data.title.slice(0, 30)}...` : data.title}</li>
-              </Link>
-            )) :
-            <li>loading...</li>
-          }
-        </ul>}
+            className="searchItems">
+            { 
+            filteredData.length > 0 ?
+              filteredData.map((data, i) => (
+                <Link key={i} to={`/product/${data.id}`}>
+                  <li onClick={() => setSearch(false)} >{data.title.length > 30 ? `${data.title.slice(0, 30)}...` : data.title}</li>
+                </Link>
+              )):
+              <li>no item</li>
+
+            }
+          </ul>
+        }
       </div>
       <div className='nav-items'>
         <Link to={"/cart"}>
