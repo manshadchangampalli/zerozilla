@@ -25,3 +25,12 @@ export const navItems = (state=[],action) => {
             return state
     }
 }
+
+export const searchItem = (state=[],action) => {
+    switch(action.type){
+        case "SEARCH_ITEM":
+            return state = action.payload
+        default:
+            return state
+    }
+}

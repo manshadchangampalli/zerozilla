@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import React, { memo, useEffect, useState } from 'react'
 import './header.scss'
 import searchimg from '../../Assets/img/search.png'
 import cartimg from '../../Assets/img/cart.png'
 import avatarimg from '../../Assets/img/avatar.png'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
+import { searchItem } from '../../redux/action'
 
 const Header = () => {
   const [value, setValue] = useState("")
@@ -14,12 +15,19 @@ const Header = () => {
   const [profile, setProfile] = useState(false)
   const cartArray = useSelector(state => state.cartReducer)
 
+  const dispatch = useDispatch()
+  const reduxSearch = useSelector(state=>state.searchItem)
   useEffect(() => {
+    if(reduxSearch.length>0){
+      setData(reduxSearch)
+    } else{
     fetch(`https://fakestoreapi.com/products`)
       .then(res => res.json())
       .then(data => {
         setData(data);
+        dispatch(searchItem(data))
       })
+    }
   }, [])
   const searchItem = (e) => {
     setSearch(true)
@@ -29,7 +37,7 @@ const Header = () => {
     })
     setFilteredData(fdata);
   }
-  console.log(filteredData);
+  
   return (
     <div className='header'>
       <Link to="/">
@@ -43,6 +51,7 @@ const Header = () => {
           <ul
             className="searchItems">
             { 
+            data.length>0?
             filteredData.length > 0 ?
               filteredData.map((data, i) => (
                 <Link key={i} to={`/product/${data.id}`}>
@@ -50,7 +59,7 @@ const Header = () => {
                 </Link>
               )):
               <li>no item</li>
-
+              : <li>loading...</li>
             }
           </ul>
         }
@@ -77,4 +86,4 @@ const Header = () => {
   )
 }
 
-export default Header
+export default memo(Header)  

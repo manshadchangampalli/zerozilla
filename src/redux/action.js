@@ -17,3 +17,9 @@ export const navItems = (item) => {
         payload:item
     }
 }
+export const searchItem = (item) => {
+    return{
+        type:"SEARCH_ITEM",
+        payload:item
+    }
+}
